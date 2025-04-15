@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inaccuracy Reports</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+
+    .section {
+      background: white;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    textarea, select, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .status-pending { color: orange; }
+    .status-approved { color: green; }
+    .status-rejected { color: red; }
+
+    .points {
+      font-size: 1.2em;
+      color: #28a745;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯 Inaccuracy Reporting System</h1>
+
+  <!-- Submission Form -->
+  <div class="section">
+    <h2>Report an Inaccuracy</h2>
+    <label for="type">Type of Issue:</label>
+    <select id="type">
+      <option value="Cast">Incorrect Cast</option>
+      <option value="Date">Incorrect Date</option>
+      <option value="Fact">Incorrect Fact</option>
+    </select>
+
+    <label for="details">Details:</label>
+    <textarea id="details" rows="4" placeholder="Describe the issue..."></textarea>
+
+    <label for="suggestion">Suggested Correction:</label>
+    <input type="text" id="suggestion" placeholder="Enter your corrected info" />
+
+    <button onclick="submitReport()">Submit Report</button>
+  </div>
+
+  <!-- Correction Log -->
+  <div class="section">
+    <h2>Correction Log</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th>Suggestion</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="logBody">
+        <!-- Dynamic reports will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Contributor Points -->
+  <div class="section">
+    <h2>Contributor Progress</h2>
+    <p>You have earned: <span class="points" id="points">0</span> points 🎉</p>
+  </div>
+
+  <script>
+    let reports = [];
+    let points = 0;
+
+    function submitReport() {
+      const type = document.getElementById("type").value;
+      const details = document.getElementById("details").value.trim();
+      const suggestion = document.getElementById("suggestion").value.trim();
+
+      if (!details || !suggestion) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      const report = {
+        issue: `${type}: ${details}`,
+        suggestion,
+        status: "pending"
+      };
+
+      reports.push(report);
+      updateLog();
+
+      
+      document.getElementById("details").value = "";
+      document.getElementById("suggestion").value = "";
+
+      
+      setTimeout(() => resolveReport(report), 3000);
+    }
+
+    function resolveReport(report) {
+    
+      const approved = Math.random() > 0.3;
+      report.status = approved ? "approved" : "rejected";
+
+      if (approved) {
+        points += 10;
+        document.getElementById("points").textContent = points;
+      }
+
+      updateLog();
+    }
+
+    function updateLog() {
+      const tbody = document.getElementById("logBody");
+      tbody.innerHTML = "";
+
+      reports.forEach(r => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${r.issue}</td>
+          <td>${r.suggestion}</td>
+          <td class="status-${r.status}">${r.status.charAt(0).toUpperCase() + r.status.slice(1)}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+
+</body>
+</html>

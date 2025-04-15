@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Release Calendar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .filters {
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 6px 10px;
+      margin-right: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .release-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      position: relative;
+    }
+
+    .release-card h3 {
+      margin: 0 0 5px;
+    }
+
+    .release-card small {
+      color: #777;
+    }
+
+    .countdown {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .reminder-btn {
+      padding: 6px 10px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .reminder-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Release Calendar</h1>
+
+  <div class="filters">
+    <label for="platform-filter">Filter by:</label>
+    <select id="platform-filter" onchange="filterReleases()">
+      <option value="all">All</option>
+      <option value="theatrical">Theatrical</option>
+      <option value="streaming">Streaming</option>
+      <option value="festival">Festival</option>
+    </select>
+  </div>
+
+  <div class="grid" id="release-grid">
+    <!-- Release cards will be injected here -->
+  </div>
+
+  <script>
+    const releases = [
+      {
+        title: "Fast and Furious 9",
+        date: "2025-05-01T18:00:00",
+        platform: "theatrical"
+      },
+      {
+        title: "Karagar (Bongo)",
+        date: "2025-04-15T09:00:00",
+        platform: "streaming"
+      },
+      {
+        title: "Oscar Winning Festival: Opening Film",
+        date: "2025-05-14T20:00:00",
+        platform: "festival"
+      },
+      {
+        title: "The Maze Runner: 2018",
+        date: "2025-06-10T00:00:00",
+        platform: "streaming"
+      }
+    ];
+
+    function formatCountdown(timeDiff) {
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    function renderReleases(filter = "all") {
+      const container = document.getElementById("release-grid");
+      container.innerHTML = "";
+
+      releases
+        .filter(release => filter === "all" || release.platform === filter)
+        .forEach((release, index) => {
+          const card = document.createElement("div");
+          card.className = "release-card";
+          card.setAttribute("data-index", index);
+
+          card.innerHTML = `
+            <h3>${release.title}</h3>
+            <small>${release.platform.charAt(0).toUpperCase() + release.platform.slice(1)}</small>
+            <div class="countdown" id="countdown-${index}">Loading...</div>
+            <button class="reminder-btn" onclick="setReminder('${release.title}', '${release.date}')">Set Reminder</button>
+          `;
+
+          container.appendChild(card);
+          startCountdown(index, release.date);
+        });
+    }
+
+    function startCountdown(index, releaseDateStr) {
+      const target = new Date(releaseDateStr).getTime();
+      const countdownEl = document.getElementById(`countdown-${index}`);
+
+      function update() {
+        const now = Date.now();
+        const diff = target - now;
+
+        if (diff <= 0) {
+          countdownEl.textContent = "Released!";
+          clearInterval(interval);
+          return;
+        }
+
+        countdownEl.textContent = formatCountdown(diff);
+      }
+
+      update();
+      const interval = setInterval(update, 1000);
+    }
+
+    function filterReleases() {
+      const value = document.getElementById("platform-filter").value;
+      renderReleases(value);
+    }
+
+    function setReminder(title, dateStr) {
+      const releaseTime = new Date(dateStr).getTime();
+      const now = Date.now();
+      const timeLeft = releaseTime - now;
+
+      if (timeLeft <= 0) {
+        alert(`${title} is already released.`);
+        return;
+      }
+
+      setTimeout(() => {
+        alert(`⏰ Reminder: "${title}" is now available!`);
+      }, Math.min(timeLeft, 10_000)); // For demo, limit to 10s max
+
+      alert(`Reminder set for "${title}".`);
+    }
+
+    // Initial render
+    renderReleases();
+  </script>
+
+</body>
+</html>

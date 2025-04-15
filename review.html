@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .review-editor {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            font-size: 24px;
+            color: #ccc;
+        }
+
+            .star.selected {
+                color: gold;
+            }
+
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        .review {
+            background-color:#0000FF;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+            .review strong {
+                color: #333;
+                margin-bottom: 5px;
+                display: block;
+            }
+
+        .report {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            color: #ff4444;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+            .report:hover {
+                text-decoration: underline;
+            }
+
+        .comment-thread {
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>User Reviews</h1>
+
+    <div class="review-editor">
+        <h2>Write a Review</h2>
+
+        <div class="stars" id="ratingStars">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+
+        <textarea id="reviewText" rows="4" placeholder="Write your review here..."></textarea>
+        <button onclick="submitReview()">Submit</button>
+    </div>
+
+    <div id="reviewsSection">
+        <div class="review">
+            <button class="report" onclick="reportReview(this)">Report</button>
+            <strong>Mammoti</strong>
+            <div class="stars">★★★★☆</div>
+            <p>Precise Horror scene, loved to watch!</p>
+
+            <div class="comment-thread">
+                <strong>Akram Khan</strong>
+                <p>I agree! The acting of Dulqer Salman was top-notch.</p>
+                <button class="report" onclick="reportReview(this)">Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll("#ratingStars .star");
+        let currentRating = 0;
+
+        
+        stars.forEach(star => {
+            star.addEventListener("click", () => {
+                currentRating = parseInt(star.dataset.value);
+                updateStars();
+            });
+
+            star.addEventListener("mouseover", () => {
+                const value = parseInt(star.dataset.value);
+                highlightStars(value);
+            });
+
+            star.addEventListener("mouseout", () => {
+                updateStars();
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                const value = parseInt(star.dataset.value);
+                star.classList.toggle("selected", value <= rating);
+            });
+        }
+
+        function updateStars() {
+            stars.forEach(star => {
+                const value = parseInt(star.dataset.value);
+                star.classList.toggle("selected", value <= currentRating);
+            });
+        }
+
+        function submitReview() {
+            const reviewText = document.getElementById("reviewText").value.trim();
+
+            if (!reviewText || currentRating === 0) {
+                alert("Please select a rating and write a review.");
+                return;
+            }
+
+            const reviewSection = document.getElementById("reviewsSection");
+            const newReview = document.createElement("div");
+            newReview.className = "review";
+            newReview.innerHTML = `
+                    <button class="report" onclick="reportReview(this)">Report</button>
+                    <strong>You</strong>
+                    <div class="stars">${"★".repeat(currentRating)}${"☆".repeat(5 - currentRating)}</div>
+                    <p>${reviewText}</p>
+                `;
+
+            reviewSection.insertBefore(newReview, reviewSection.firstChild);
+
+            
+            document.getElementById("reviewText").value = "";
+            currentRating = 0;
+            updateStars();
+        }
+
+        function reportReview(button) {
+            if (confirm("Are you sure you want to report this review?")) {
+                button.parentElement.style.display = "blue"; 
+                alert("Review reported!");
+            }
+        }
+    </script>
+
+</body>
+</html>

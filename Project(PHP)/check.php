@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<li>$msg</li>";
         }
         echo "</ul>";
-        echo "<p><a href='javascript:history.back()'>← Back to form</a></p>";
+        echo "<p><a href='javascript:history.back()'>Back to form</a></p>";
     }
 }
 ?>

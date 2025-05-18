@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #ffffff;
+            border: 2px solid #cc0000;
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #cc0000;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #cc0000;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 99%;
+        }
+
+        input[type="submit"],
+        .link-button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #cc0000;
+            color: #fff;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        input[type="submit"]:hover,
+        .link-button:hover {
+            background-color: #a80000;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>LOGIN</h1>
+<form method="post" action="login_check.php" onsubmit="return validLogin()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" />
+    <p id="uMsg" style="color:red;"></p> 
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" />
+    <p id="pMsg" style="color:red;"></p>  
+
+    <input type="submit" value="Login" />
+
+            <div class="button-group">
+                <a class="link-button" href="forget_pass.html">Forgot Password?</a>
+                <a class="link-button" href="User_authentication.html">Register</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+       function validLogin()
+       {
+        const username = document.getElementById("username").value.trim().toLowerCase();
+        const password = document.getElementById("password").value;
+
+        const uMsg = document.getElementById("uMsg");
+        const pMsg = document.getElementById("pMsg");
+
+        uMsg.innerText = "";
+        pMsg.innerText = "";
+
+        let valid = true;
+
+        if (username === "") {
+            uMsg.innerText = "Username is required";
+            valid = false;
+        }
+
+        if (password === "") {
+            pMsg.innerText = "Password is required";
+            valid = false;
+        }
+
+        if (valid) 
+        {
+            if ((username === "user one" && password === "123456") || 
+                (username === "user two" && password === "123456")) {
+                return true;
+            } else {
+                pMsg.innerText = "Invalid username or password";
+                return false;
+            }
+        }
+
+        return false;
+        }
+    </script>
+</body>
+</html>

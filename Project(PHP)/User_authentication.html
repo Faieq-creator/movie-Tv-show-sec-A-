@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign UP</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 500px;
+            background-color: #ffffff;
+            border: 2px solid #cc0000;
+            border-radius: 10px;
+            padding: 30px;
+            
+        }
+
+        h1 {
+            text-align: center;
+            color: #cc0000;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #cc0000;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        p {
+            margin: 2px 0 10px;
+            font-size: 0.85em;
+            color: red;
+            height: 1em;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #cc0000;
+            color: #fff;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+
+        input[type="submit"]:hover {
+            background-color: #a80000;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>REGISTER NOW !!</h1>
+        <form method="post" action="check.php" enctype="">
+
+        
+            <label for="username">Username:</label>
+            <input type="text" id="username" name ="username"/>
+            <p id="umsg"></p>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name ="email"/>
+            <p id="emsg"></p>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name ="password"/>
+            <p id="pmsg"></p>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password"/>
+            <p id="cpmsg"></p>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone"/>
+            <p id="phmsg"></p>
+
+            <label>Gender:</label>
+            <div>
+                <input type="radio" name="gender" value="Male" /> Male
+                <input type="radio" name="gender" value="Female" /> Female
+            </div>
+            <p id="gmsg"></p>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob"/>
+            <p id="dmsg"></p>
+
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+                <option value="">Select Country</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Australia">Australia</option>
+                <option value="Ireland">Ireland</option>
+            </select>
+            <p id="cmsg"></p>
+
+            <label>
+                <input type="checkbox" id="terms" name="terms" /> I agree to terms and conditions
+            </label>
+            <p id="tmsg"></p>
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    <!-- <script>
+        // function validcheck() {
+        //     let valid = true;
+
+        //     const username = document.getElementById("username").value.trim();
+        //     const umsg = document.getElementById("umsg");
+        //     if (username === "" || username.split(" ").length < 2) {
+        //         umsg.innerText = "Enter first and last name";
+        //         valid = false;
+        //     } else {
+        //         umsg.innerText = "";
+        //     }
+
+        //     const email = document.getElementById("email").value.trim();
+        //     const emsg = document.getElementById("emsg");
+        //     if (!email.includes("@") || !email.includes(".com")) {
+        //         emsg.innerText = "Enter a valid email";
+        //         valid = false;
+        //     } else {
+        //         emsg.innerText = "";
+        //     }
+
+        //     const password = document.getElementById("password").value;
+        //     const confirmPassword = document.getElementById("confirm_password").value;
+        //     const pmsg = document.getElementById("pmsg");
+        //     const cpmsg = document.getElementById("cpmsg");
+        //     if (password.length < 6) {
+        //         pmsg.innerText = "Password must be at least 6 characters";
+        //         valid = false;
+        //     } else {
+        //         pmsg.innerText = "";
+        //     }
+        //     if (password !== confirmPassword) {
+        //         cpmsg.innerText = "Passwords do not match";
+        //         valid = false;
+        //     } else {
+        //         cpmsg.innerText = "";
+        //     }
+
+        //     const phone = document.getElementById("phone").value.trim();
+        //     const phmsg = document.getElementById("phmsg");
+        //     if (!/^\d{10}$/.test(phone)) {
+        //         phmsg.innerText = "Enter a 10-digit number";
+        //         valid = false;
+        //     } else {
+        //         phmsg.innerText = "";
+        //     }
+
+        //     const genders = document.getElementsByName("gender");
+        //     const gmsg = document.getElementById("gmsg");
+        //     let genderSelected = false;
+        //     for (let gender of genders) {
+        //         if (gender.checked) {
+        //             genderSelected = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!genderSelected) {
+        //         gmsg.innerText = "Select your gender";
+        //         valid = false;
+        //     } else {
+        //         gmsg.innerText = "";
+        //     }
+
+        //     const dob = document.getElementById("dob").value;
+        //     const dmsg = document.getElementById("dmsg");
+        //     if (dob === "") {
+        //         dmsg.innerText = "Select your birth date";
+        //         valid = false;
+        //     } else {
+        //         dmsg.innerText = "";
+        //     }
+
+        //     const country = document.getElementById("country").value;
+        //     const cmsg = document.getElementById("cmsg");
+        //     if (country === "") {
+        //         cmsg.innerText = "Select a country";
+        //         valid = false;
+        //     } else {
+        //         cmsg.innerText = "";
+        //     }
+
+        //     const terms = document.getElementById("terms").checked;
+        //     const tmsg = document.getElementById("tmsg");
+        //     if (!terms) {
+        //         tmsg.innerText = "You must agree to the terms";
+        //         valid = false;
+        //     } else {
+        //         tmsg.innerText = "";
+        //     }
+
+        //     return valid;
+        // }
+     </script> -->
+</body>
+</html>

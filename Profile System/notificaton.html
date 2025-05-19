@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+
+        .notification-center {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .header h2 {
+                margin: 0;
+            }
+
+        .bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+            .bell::after {
+                content: '3'; /* Example unread count */
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background: red;
+                color: white;
+                border-radius: 50%;
+                padding: 4px 7px;
+                font-size: 12px;
+            }
+
+        .settings {
+            margin-top: 20px;
+        }
+
+            .settings h3 {
+                margin-bottom: 10px;
+            }
+
+            .settings label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+        .notifications {
+            margin-top: 30px;
+        }
+
+            .notifications h3 {
+                margin-bottom: 10px;
+            }
+
+        .notification-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notification-center">
+        <div class="header">
+            <h2>Notification Center</h2>
+            <div class="bell" title="View Notifications">
+                🔔
+            </div>
+        </div>
+
+        <div class="settings">
+            <h3>Notification Settings</h3>
+            <label><input type="checkbox" checked> Email Notifications</label>
+            <label><input type="checkbox"> Push Notifications</label>
+        </div>
+
+        <div class="notifications">
+            <h3>Recent Notifications</h3>
+            <div class="notification-item">🔔 You have a new message.</div>
+            <div class="notification-item">📧 Your settings were updated.</div>
+            <div class="notification-item">🔔 Reminder: Meeting at 3 PM.</div>
+        </div>
+    </div>
+
+</body>
+</html>

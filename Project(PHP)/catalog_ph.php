@@ -1,7 +1,5 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status']))
-    {
+<?php 
+require_once 'session_check.php';
 ?>
 
 <!DOCTYPE html>
@@ -287,11 +285,3 @@
 </body>
 </html>
 
-<?php
-    }
-
-    else{
-        header('location: login.html');
-    }
-
-?>

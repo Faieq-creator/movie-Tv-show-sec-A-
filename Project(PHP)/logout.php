@@ -1,6 +1,12 @@
 <?php
-    session_start();
-    session_destroy();
+session_start();
 
-    header('location: login.html');
+$_SESSION = array();
+
+// Destroy the session
+session_destroy();
+
+// Redirect to login page
+header("Location: login.html");
+exit;
 ?>

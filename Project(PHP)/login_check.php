@@ -1,40 +1,33 @@
 <?php
 session_start();
-$errors = [];
 
+// Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = strtolower(trim($_POST["username"]));
-    $password = $_POST["password"];
-
-    if (empty($username)) {
-        $errors['username'] = "Username is required";
+    $username = strtolower(trim($_POST['username']));
+    $password = $_POST['password'];
+    
+    // Validate credentials (in a real app, you'd check against a database)
+    $valid_users = [
+        'user one' => '123456',
+        'user two' => '123456'
+    ];
+    
+    if (array_key_exists($username, $valid_users) && $password === $valid_users[$username]) {
+        // Authentication successful - create session
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
+        
+        // Redirect to protected page
+        header("Location: Catalog.html");
+        exit;
+    } else {
+        // Authentication failed
+        header("Location: login.html?error=invalid_credentials");
+        exit;
     }
-
-    if (empty($password)) {
-        $errors['password'] = "Password is required";
-    }
-
-    if (empty($errors)) {
-        $valid_users = [
-            "user one" => "123456",
-            "user two" => "123456"
-        ];
-
-        if (isset($valid_users[$username]) && $valid_users[$username] === $password) {
-            $_SESSION['status'] = true;
-            $_SESSION['username'] = $username;
-            header("Location: catalog_ph.php");
-            exit;
-        } else {
-            $errors['login'] = "Invalid username or password";
-        }
-    }
-
-    // Display error messages
-    echo "<h3 style='color:red;'>Please correct the following errors:</h3><ul>";
-    foreach ($errors as $error) {
-        echo "<li>$error</li>";
-    }
-    echo "</ul><p><a href='javascript:history.back()'>Back to login</a></p>";
+} else {
+    // Not a POST request
+    header("Location: login.html");
+    exit;
 }
 ?>

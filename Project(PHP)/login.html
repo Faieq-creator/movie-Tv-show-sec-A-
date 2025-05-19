@@ -78,61 +78,48 @@
 <body>
     <div class="form-container">
         <h1>LOGIN</h1>
-<form method="post" action="login_check.php" onsubmit="return validLogin()">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" />
-    <p id="uMsg" style="color:red;"></p> 
+        <form method="post" action="login_check.php" onsubmit="return validLogin()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" />
+            <p id="uMsg" style="color:red;"></p> 
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" />
-    <p id="pMsg" style="color:red;"></p>  
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <p id="pMsg" style="color:red;"></p>  
 
-    <input type="submit" value="Login" />
+            <input type="submit" value="Login" />
 
             <div class="button-group">
                 <a class="link-button" href="forget_pass.html">Forgot Password?</a>
-                <a class="link-button" href="User_authentication.html">Register</a>
+                <a class="link-button" href="User_authentication.php">Register</a>
             </div>
         </form>
     </div>
 
     <script>
+        function validLogin() {
+            const username = document.getElementById("username").value.trim().toLowerCase();
+            const password = document.getElementById("password").value;
 
-       function validLogin()
-       {
-        const username = document.getElementById("username").value.trim().toLowerCase();
-        const password = document.getElementById("password").value;
+            const uMsg = document.getElementById("uMsg");
+            const pMsg = document.getElementById("pMsg");
 
-        const uMsg = document.getElementById("uMsg");
-        const pMsg = document.getElementById("pMsg");
+            uMsg.innerText = "";
+            pMsg.innerText = "";
 
-        uMsg.innerText = "";
-        pMsg.innerText = "";
+            let valid = true;
 
-        let valid = true;
-
-        if (username === "") {
-            uMsg.innerText = "Username is required";
-            valid = false;
-        }
-
-        if (password === "") {
-            pMsg.innerText = "Password is required";
-            valid = false;
-        }
-
-        if (valid) 
-        {
-            if ((username === "user one" && password === "123456") || 
-                (username === "user two" && password === "123456")) {
-                return true;
-            } else {
-                pMsg.innerText = "Invalid username or password";
-                return false;
+            if (username === "") {
+                uMsg.innerText = "Username is required";
+                valid = false;
             }
-        }
 
-        return false;
+            if (password === "") {
+                pMsg.innerText = "Password is required";
+                valid = false;
+            }
+
+            return valid;
         }
     </script>
 </body>

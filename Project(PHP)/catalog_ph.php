@@ -204,7 +204,7 @@
                 year: "2008",
                 rating: 5,
                 language: "English",
-                poster: "https://www.impawards.com/2008/posters/dark_knight_ver12.jpg"
+                poster: ""
             }
         ];
 
@@ -291,7 +291,7 @@
     }
 
     else{
-        header('location: User_authentication.html');
+        header('location: login.html');
     }
 
 ?>

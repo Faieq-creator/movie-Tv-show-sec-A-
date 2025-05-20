@@ -95,13 +95,15 @@
             document.getElementById("newPassMsg").innerText = "";
             document.getElementById("confirmPassMsg").innerText = "";
 
-            const emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-            if (!emailRegex.test(email)) {
-                document.getElementById("emailMsg").innerText = "Enter a valid email.";
-                isValid = false;
+              if (email.endsWith("@gmail.com") || email.endsWith("@yahoo.com")) {
+    
+                document.getElementById("emailMsg").innerText = ""; 
+                 isValid = true; 
+             } else {
+    
+               document.getElementById("emailMsg").innerText = "Only valid email is accepted.";
+           isValid = false;
             }
-
             if (otp !== "123456") {
                 document.getElementById("otpMsg").innerText = "Invalid OTP.";
                 isValid = false;

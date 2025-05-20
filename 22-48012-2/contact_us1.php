@@ -1,3 +1,7 @@
+<?php 
+require_once 'session_check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +103,7 @@
         <input type="text" id="captcha" name="captcha" placeholder="Enter answer">
         <p class="error" id="captchaError"></p>
 
-        <!-- Hidden field to store correct answer -->
+    
         <input type="hidden" id="correctAnswer" name="correctAnswer">
 
         <input type="submit" value="Submit">

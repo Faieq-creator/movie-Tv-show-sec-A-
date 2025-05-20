@@ -1,3 +1,7 @@
+<?php 
+require_once 'session_check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +125,7 @@
                 </tr>
             </table>
             <div style="text-align: center; margin-top: 10px;">
-                <a href="Catalog.html">
+                <a href="Catalog_ph.php">
                 <button type="button">OK</button></a>
             </div>
         </fieldset>

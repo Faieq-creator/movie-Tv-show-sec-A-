@@ -1,3 +1,6 @@
+<?php 
+require_once 'session_check.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,8 +128,8 @@
 <body>
     <!-- Top Right Buttons -->
     <div class="top-buttons">
-        <a href="trivia.html" class="top-button">TRIVIA !!</a>
-        <a href="contact_us.html" class="top-button">CONTACT US</a>
+        <a href="trivia.php" class="top-button">TRIVIA !!</a>
+        <a href="contact_us1.php" class="top-button">CONTACT US</a>
         <a href="logout.php" class="top-button">LOG OUT</a>
     </div>
 
@@ -198,8 +201,8 @@
             
             <!-- Bottom Buttons -->
             <div class="bottom-buttons">
-                <button type="button" onclick="window.location.href='actor prof.html'">ACTORS PROFILE</button>
-                <button type="button" onclick="window.location.href='stream link.html'">WATCH NOW</button>
+                <button type="button" onclick="window.location.href='actor prof.php'">ACTORS PROFILE</button>
+                <button type="button" onclick="window.location.href='stream link.php'">WATCH NOW</button>
             </div>
         </fieldset>
     </form>
@@ -284,7 +287,7 @@
 
         // When Genre Builder button clicked
         genreBuilderButton.onclick = function() {
-            window.location.href = "Genre.html"; 
+            window.location.href = "Genre.php"; 
         };
 
         // Function to show movies
@@ -318,5 +321,7 @@
         // Show all movies at start
         showMovies(movies);
     </script>
+
 </body>
 </html>
+

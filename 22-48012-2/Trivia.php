@@ -1,8 +1,34 @@
+<?php 
+require_once 'session_check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Trivia Section</title>
     <style>
+        /* Top Navigation Buttons */
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .top-button {
+            padding: 10px 20px;
+            background-color: #a80000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .top-button:hover {
+            background-color: #8a0000;
+        }
+
+        /* Existing Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -72,7 +98,7 @@
 
         button {
             padding: 10px 20px;
-            background-color: #cc0000;
+            background-color: #a80000;
             color: white;
             border: none;
             border-radius: 5px;
@@ -81,16 +107,7 @@
         }
 
         button:hover {
-            background-color: #a80000;
-        }
-
-        td a {
-            color: #cc0000;
-            text-decoration: none;
-        }
-
-        td a:hover {
-            text-decoration: underline;
+            background-color: #8a0000;
         }
 
         .submit-trivia button {
@@ -105,10 +122,18 @@
             cursor: pointer;
             border: none;
             background-color: transparent;
+            padding: 5px 10px;
         }
     </style>
 </head>
 <body>
+    
+    <div class="top-buttons">
+        <a href="contact_us1.php" class="top-button">CONTACT US</a>
+        <a href="logout.php" class="top-button">LOG OUT</a>
+    </div>
+
+    <!-- Main Trivia Form -->
     <form id="triviaForm">
         <fieldset>
             <legend>FUN FACTS !!</legend>
@@ -134,7 +159,7 @@
                     <td><button class="delete-btn" onclick="deleteTrivia(event)">Delete</button></td>
                 </tr>
                 <tr>
-                    <td>James Cameron drew Rose’s sketch with his own hands — not Leonardo DiCaprio’s.</td>
+                    <td>James Cameron drew Rose's sketch with his own hands — not Leonardo DiCaprio's.</td>
                     <td></td>
                 </tr>
             </table>
@@ -229,48 +254,86 @@
         function deleteTrivia(event) {
             event.preventDefault();
             const row = event.target.closest('tr');
-            row.parentNode.removeChild(row); // Remove the clicked row
+            if (confirm('Are you sure you want to delete this trivia?')) {
+                row.parentNode.removeChild(row);
+            }
         }
 
         // Handling form submission to add new trivia
         document.getElementById("triviaForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form from submitting normally
+            event.preventDefault();
 
             // Get form values
-            const movieTitle = document.getElementById("movieTitle").value;
+            const movieTitle = document.getElementById("movieTitle").value.trim();
             const triviaType = document.getElementById("triviaType").value;
-            const triviaDescription = document.getElementById("triviaDescription").value;
+            const triviaDescription = document.getElementById("triviaDescription").value.trim();
 
-            // Create a new row for the trivia
-            const newRow = document.createElement("tr");
-
-            // Create a new cell for the movie title and trivia description
-            const newCell = document.createElement("td");
-            newCell.innerHTML = `<b>Movie:</b> ${movieTitle}<br>${triviaDescription}`;
-
-            const deleteButtonCell = document.createElement("td");
-            const deleteButton = document.createElement("button");
-            deleteButton.classList.add("delete-btn");
-            deleteButton.textContent = "Delete";
-            deleteButton.addEventListener("click", deleteTrivia);
-            deleteButtonCell.appendChild(deleteButton);
-
-            newRow.appendChild(newCell);
-            newRow.appendChild(deleteButtonCell);
-
-            // Add the new trivia to the correct table
-            if (triviaType === "Fun Fact") {
-                document.getElementById("funFactsTable").appendChild(newRow);
-            } else if (triviaType === "Easter Egg") {
-                document.getElementById("easterEggsTable").appendChild(newRow);
-            } else if (triviaType === "Goof") {
-                document.getElementById("goofsTable").appendChild(newRow);
+            // Validate inputs
+            if (!movieTitle || !triviaDescription) {
+                alert('Please fill in all fields');
+                return;
             }
 
-            // Clear the form fields after submission
+            // Create new row based on trivia type
+            if (triviaType === "Fun Fact") {
+                addToFunFacts(movieTitle, triviaDescription);
+            } else if (triviaType === "Easter Egg") {
+                addToEasterEggs(movieTitle, triviaDescription);
+            } else if (triviaType === "Goof") {
+                addToGoofs(movieTitle, triviaDescription);
+            }
+
+            // Clear form
             document.getElementById("movieTitle").value = "";
             document.getElementById("triviaDescription").value = "";
         });
+
+        function addToFunFacts(movie, description) {
+            const table = document.getElementById("funFactsTable");
+            
+            // Add movie row
+            const movieRow = table.insertRow();
+            const movieCell = movieRow.insertCell(0);
+            movieCell.colSpan = 1;
+            movieCell.innerHTML = `<b>Movie:</b> ${movie}`;
+            
+            const deleteCell = movieRow.insertCell(1);
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = deleteTrivia;
+            deleteCell.appendChild(deleteBtn);
+            
+            // Add description row
+            const descRow = table.insertRow();
+            const descCell = descRow.insertCell(0);
+            descCell.colSpan = 2;
+            descCell.textContent = description;
+        }
+
+        function addToEasterEggs(movie, description) {
+            const table = document.getElementById("easterEggsTable");
+            const newRow = table.insertRow();
+            
+            newRow.innerHTML = `
+                <td>${movie}</td>
+                <td>${description}</td>
+                <td>Unknown</td>
+                <td><button class="delete-btn" onclick="deleteTrivia(event)">Delete</button></td>
+            `;
+        }
+
+        function addToGoofs(movie, description) {
+            const table = document.getElementById("goofsTable");
+            const newRow = table.insertRow();
+            
+            newRow.innerHTML = `
+                <td>${movie}</td>
+                <td>Continuity</td>
+                <td>${description}</td>
+                <td><button class="delete-btn" onclick="deleteTrivia(event)">Delete</button></td>
+            `;
+        }
     </script>
 </body>
 </html>

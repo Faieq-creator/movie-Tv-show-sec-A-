@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $username;
         
         // Redirect to protected page
-        header("Location: Catalog.html");
+        header("Location: Catalog_ph.php");
         exit;
     } else {
         // Authentication failed

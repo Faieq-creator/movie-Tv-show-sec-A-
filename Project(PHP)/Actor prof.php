@@ -97,10 +97,10 @@ require_once 'session_check.php';
     </style>
 </head>
 <body>
-    <!-- Top Right Buttons -->
+   
     <div class="top-buttons">
-        <a href="trivia.html" class="top-button">TRIVIA !!</a>
-        <a href="contact_us.html" class="top-button">CONTACT US</a>
+        <a href="trivia.php" class="top-button">TRIVIA !!</a>
+        <a href="contact_us.php" class="top-button">CONTACT US</a>
         <a href="logout.php" class="top-button">LOG OUT</a>
     </div>
 
@@ -198,7 +198,7 @@ require_once 'session_check.php';
             </table>
         </fieldset>
         <div style="text-align: center; margin-top: 10px;">
-            <a href="Catalog.html">
+            <a href="Catalog_ph.php">
                 <button type="button">OK</button>
             </a>
         </div>  

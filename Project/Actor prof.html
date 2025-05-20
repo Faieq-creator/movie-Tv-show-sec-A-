@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,26 @@
             background-color: #f2f2f2;
             margin: 0;
             padding: 20px;
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .top-button {
+            padding: 10px 20px;
+            background-color: #a80000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .top-button:hover {
+            background-color: #8a0000;
         }
 
         form {
@@ -58,7 +80,7 @@
         }
         button {
             padding: 10px 20px;
-            background-color: #cc0000;
+            background-color: #a80000;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -67,12 +89,19 @@
         }
 
         button:hover {
-            background-color: #a80000;
+            background-color: #8a0000;
         }
 
     </style>
 </head>
 <body>
+    <!-- Top Right Buttons -->
+    <div class="top-buttons">
+        <a href="trivia.html" class="top-button">TRIVIA !!</a>
+        <a href="contact_us.html" class="top-button">CONTACT US</a>
+        <a href="logout.php" class="top-button">LOG OUT</a>
+    </div>
+
     <form>
         <fieldset>
             <legend>SELECT ACTOR</legend>
@@ -316,6 +345,5 @@
                 actorSelect.addEventListener("change", updateActorProfile);
             }
         </script>
-              
 </body>
 </html>

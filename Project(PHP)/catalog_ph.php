@@ -1,7 +1,6 @@
 <?php 
 require_once 'session_check.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,9 +96,43 @@ require_once 'session_check.php';
             gap: 10px;
             margin-top: 10px;
         }
+        
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .top-button {
+            padding: 10px 20px;
+            background-color: #a80000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .top-button:hover {
+            background-color: #555;
+        }
+        
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <!-- Top Right Buttons -->
+    <div class="top-buttons">
+        <a href="trivia.php" class="top-button">TRIVIA !!</a>
+        <a href="contact_us1.php" class="top-button">CONTACT US</a>
+        <a href="logout.php" class="top-button">LOG OUT</a>
+    </div>
+
     <form>
         <fieldset>
             <legend>MEDIA CATALOG</legend>
@@ -165,6 +198,12 @@ require_once 'session_check.php';
             <table id="movieTable">
                 <!-- Movies will show here -->
             </table>
+            
+            <!-- Bottom Buttons -->
+            <div class="bottom-buttons">
+                <button type="button" onclick="window.location.href='actor prof.php'">ACTORS PROFILE</button>
+                <button type="button" onclick="window.location.href='stream link.php'">WATCH NOW</button>
+            </div>
         </fieldset>
     </form>
 
@@ -180,7 +219,7 @@ require_once 'session_check.php';
                 year: "2010",
                 rating: 5,
                 language: "English",
-                poster: "https://www.impawards.com/2010/posters/inception_ver13.jpg"
+                poster: "https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"
             },
             {
                 title: "Toy Story",
@@ -202,7 +241,7 @@ require_once 'session_check.php';
                 year: "2008",
                 rating: 5,
                 language: "English",
-                poster: ""
+                poster: "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
             }
         ];
 
@@ -248,7 +287,7 @@ require_once 'session_check.php';
 
         // When Genre Builder button clicked
         genreBuilderButton.onclick = function() {
-            window.location.href = "Genre.html"; // Go to Genre.html
+            window.location.href = "Genre.php"; 
         };
 
         // Function to show movies
@@ -282,6 +321,7 @@ require_once 'session_check.php';
         // Show all movies at start
         showMovies(movies);
     </script>
+
 </body>
 </html>
 

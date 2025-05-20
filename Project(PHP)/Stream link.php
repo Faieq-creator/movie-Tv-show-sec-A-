@@ -130,6 +130,7 @@ require_once 'session_check.php';
     </style>
 </head>
 <body>
+    
     <form>
         <fieldset>
             <legend>SERVICE</legend>

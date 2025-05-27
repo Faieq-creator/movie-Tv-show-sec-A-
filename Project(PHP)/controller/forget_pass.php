@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         // Simulate password reset (e.g., update DB here)
         echo "<h3 style='color:green;'>Password reset successful!</h3>";
-        echo "<p><a href='login.html'> Go to Login</a></p>";
+        echo "<p><a href='../view/login.html'> Go to Login</a></p>";
     } else {
         echo "<h3 style='color:red;'>Please fix the following errors:</h3><ul>";
         foreach ($errors as $msg) {

@@ -18,16 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $username;
         
         // Redirect to protected page
-        header("Location: Catalog_ph.php");
+        header("Location: ../controller/Catalog_ph.php");
         exit;
     } else {
         // Authentication failed
-        header("Location: login.html?error=invalid_credentials");
+        header("Location: ../view/login.html?error=invalid_credentials");
         exit;
     }
 } else {
-    // Not a POST request
-    header("Location: login.html");
+    
+    header("Location: ../view/login.html");
     exit;
 }
 ?>

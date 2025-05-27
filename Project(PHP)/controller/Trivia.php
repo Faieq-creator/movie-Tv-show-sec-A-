@@ -129,8 +129,8 @@ require_once 'session_check.php';
 <body>
     
     <div class="top-buttons">
-        <a href="contact_us1.php" class="top-button">CONTACT US</a>
-        <a href="logout.php" class="top-button">LOG OUT</a>
+        <a href="../controller/contact_us1.php" class="top-button">CONTACT US</a>
+        <a href="../controller/logout.php" class="top-button">LOG OUT</a>
     </div>
 
     <!-- Main Trivia Form -->

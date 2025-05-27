@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         echo "<script>
         alert('Message sent successfully!');
-        window.location.href='contact_us.html';
+        window.location.href='../controller/contact_us1.php';
         </script>";
         
     } else {

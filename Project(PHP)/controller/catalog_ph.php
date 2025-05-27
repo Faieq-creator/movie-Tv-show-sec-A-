@@ -128,9 +128,9 @@ require_once 'session_check.php';
 <body>
     <!-- Top Right Buttons -->
     <div class="top-buttons">
-        <a href="trivia.php" class="top-button">TRIVIA !!</a>
-        <a href="contact_us1.php" class="top-button">CONTACT US</a>
-        <a href="logout.php" class="top-button">LOG OUT</a>
+        <a href="../controller/trivia.php" class="top-button">TRIVIA !!</a>
+        <a href="../controller/contact_us1.php" class="top-button">CONTACT US</a>
+        <a href="../controller/logout.php" class="top-button">LOG OUT</a>
     </div>
 
     <form>
@@ -201,8 +201,8 @@ require_once 'session_check.php';
             
             <!-- Bottom Buttons -->
             <div class="bottom-buttons">
-                <button type="button" onclick="window.location.href='actor prof.php'">ACTORS PROFILE</button>
-                <button type="button" onclick="window.location.href='stream link.php'">WATCH NOW</button>
+                <button type="button" onclick="window.location.href='../controller/actor prof.php'">ACTORS PROFILE</button>
+                <button type="button" onclick="window.location.href='../controller/stream link.php'">WATCH NOW</button>
             </div>
         </fieldset>
     </form>
@@ -287,7 +287,7 @@ require_once 'session_check.php';
 
         // When Genre Builder button clicked
         genreBuilderButton.onclick = function() {
-            window.location.href = "Genre.php"; 
+            window.location.href = "../controller/Genre.php"; 
         };
 
         // Function to show movies

@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Final check
     if (empty($errors)) {
         $_SESSION['status'] = true;
-        header('location: login.html');
+        header('location: ../view/login.html');
         // echo "<h2 style='color:green;'>Form Submitted Successfully!</h2>";
         // echo "<h3>User Details:</h3>";
         // echo "<ul>";

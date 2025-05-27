@@ -82,7 +82,7 @@ require_once 'session_check.php';
 <body>
 <div class="form-container">
     <h1>Contact Us</h1>
-    <form method="post" action="contact_us.php" onsubmit="return validateForm()">
+    <form method="post" action="../controller/contact_us.php" onsubmit="return validateForm()">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name">
         <p class="error" id="nameError"></p>

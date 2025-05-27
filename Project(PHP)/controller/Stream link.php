@@ -201,7 +201,7 @@ require_once 'session_check.php';
                 <p><b>VPN :</b> Use a trusted VPN.</p>
             </div>
             <div style="text-align: center; margin-top: 10px;">
-                <a href="error.html">
+                <a href="../view/error.html">
                     <button type="button">VPN</button>
                 </a>
             </div>

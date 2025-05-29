@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,12 +178,22 @@
 
             const phone = document.getElementById("phone").value.trim();
             const phmsg = document.getElementById("phmsg");
-            if (!/^\d{10}$/.test(phone)) {
-                phmsg.innerText = "Enter a 10-digit number";
-                valid = false;
-            } else {
-                phmsg.innerText = "";
+
+            let isAllDigits = true;
+            for (let i = 0; i < phone.length; i++) {
+            if (phone[i] < '0' || phone[i] > '9') {
+            isAllDigits = false;
+            break;
             }
+            }
+
+            if (phone.length !== 10 || !isAllDigits) {
+            phmsg.innerText = "Enter a 10-digit number";
+            valid = false;
+            } else {
+           phmsg.innerText = "";
+           }
+
 
             const genders = document.getElementsByName("gender");
             const gmsg = document.getElementById("gmsg");

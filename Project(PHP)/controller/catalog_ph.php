@@ -126,7 +126,7 @@ require_once 'session_check.php';
     </style>
 </head>
 <body>
-    <!-- Top Right Buttons -->
+    
     <div class="top-buttons">
         <a href="../controller/trivia.php" class="top-button">TRIVIA !!</a>
         <a href="../controller/contact_us1.php" class="top-button">CONTACT US</a>
@@ -185,7 +185,7 @@ require_once 'session_check.php';
 
             </fieldset>
 
-            <!-- Buttons: OK + Genre Builder -->
+            
             <div class="button-group">
                 <button type="button" id="okButton">OK</button>
                 <button type="button" id="genreBuilderButton">Genre Builder</button>
@@ -196,10 +196,10 @@ require_once 'session_check.php';
         <fieldset>
             <legend>DETAILED VIEW</legend>
             <table id="movieTable">
-                <!-- Movies will show here -->
+                
             </table>
             
-            <!-- Bottom Buttons -->
+    
             <div class="bottom-buttons">
                 <button type="button" onclick="window.location.href='../controller/actor prof.php'">ACTORS PROFILE</button>
                 <button type="button" onclick="window.location.href='../controller/stream link.php'">WATCH NOW</button>
@@ -208,7 +208,7 @@ require_once 'session_check.php';
     </form>
 
     <script>
-        // Movies data
+    
         var movies = [
             {
                 title: "Inception",
@@ -245,7 +245,6 @@ require_once 'session_check.php';
             }
         ];
 
-        // Get elements
         var searchInput = document.getElementById('searchInput');
         var genreSelect = document.getElementById('genreSelect');
         var yearSelect = document.getElementById('yearSelect');
@@ -255,7 +254,7 @@ require_once 'session_check.php';
         var genreBuilderButton = document.getElementById('genreBuilderButton');
         var movieTable = document.getElementById('movieTable');
 
-        // When OK button clicked
+        
         okButton.onclick = function() {
             var search = searchInput.value.toLowerCase();
             var genre = genreSelect.value;
@@ -285,7 +284,7 @@ require_once 'session_check.php';
             showMovies(result);
         };
 
-        // When Genre Builder button clicked
+        
         genreBuilderButton.onclick = function() {
             window.location.href = "../controller/Genre.php"; 
         };
@@ -318,7 +317,7 @@ require_once 'session_check.php';
             movieTable.innerHTML = html;
         }
 
-        // Show all movies at start
+        
         showMovies(movies);
     </script>
 

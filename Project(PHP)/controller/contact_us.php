@@ -2,9 +2,8 @@
 session_start();
 $errors = [];
 
-// Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve and sanitize inputs
+    
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
     $subject = trim($_POST["subject"]);
@@ -39,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "CAPTCHA answer is incorrect.";
     }
 
-    // Final decision
+    
     if (empty($errors)) {
         echo "<script>
         alert('Message sent successfully!');

@@ -28,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Phone
-    $phone = trim($_POST["phone"]);
-    if (!preg_match('/^\d{10}$/', $phone)) {
-        $errors['phone'] = "Enter a 10-digit number";
+   $phone = trim($_POST["phone"]);
+    if (strlen($phone) != 10 || !ctype_digit($phone)) {
+    $errors['phone'] = "Enter a 10-digit number";
     }
 
     // Gender
@@ -39,24 +39,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['gender'] = "Select your gender";
     }
 
-    // DOB
     $dob = $_POST["dob"];
     if (empty($dob)) {
         $errors['dob'] = "Select your birth date";
     }
 
-    // Country
     $country = $_POST["country"];
     if (empty($country)) {
         $errors['country'] = "Select a country";
     }
 
-    // Terms
+    
     if (!isset($_POST["terms"])) {
         $errors['terms'] = "You must agree to the terms";
     }
 
-    // Final check
+    
     if (empty($errors)) {
         $_SESSION['status'] = true;
         header('location: ../view/login.html');

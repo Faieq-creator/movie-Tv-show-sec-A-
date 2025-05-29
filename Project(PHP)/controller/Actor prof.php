@@ -240,7 +240,7 @@ require_once 'session_check.php';
                     return;
                 }
         
-                // Predefined actor data
+            
                 const actorData = {
                     "Leonardo DiCaprio": {
                         filmography: [
